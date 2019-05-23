@@ -1,26 +1,68 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
+import Wrapper from "./AppStyle";
+import CommonHead from "./components/head";
+import { connect } from "react-redux";
+// import { Layout, Spin, Icon } from "antd";
+import { Layout } from "antd";
+
+import SignIn from "./components/signIn.jsx";
+import Enter from "./components/enter.jsx";
+const { Content } = Layout;
+// const antIcon = (
+//   <Icon
+//     type="loading"
+//     style={{
+//       fontSize: 24
+//     }}
+//     spin
+//   />
+// );
+
+function App(props) {
+  let { token } = props;
+  console.log(props);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Wrapper>
+      <Layout>
+        <CommonHead />
+        <Content
+          style={{
+            height: "calc(100% - 80px)"
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          {token ? <Enter /> : <SignIn />}
+          {/* <Spin indicator={antIcon} tip="加载中" /> */}
+
+          {/* <Spin spinning={true}>this is Content </Spin>{" "} */}
+        </Content>{" "}
+      </Layout>{" "}
+    </Wrapper>
   );
 }
 
-export default App;
+// class App extends React.Component {
+//   constructor(props) {
+//     super(props);
+//   }
+
+//   render() {
+//     return (
+//       <Wrapper>
+//         <Layout>
+//           <CommonHead />
+//           <Content>this is Content </Content>{" "}
+//         </Layout>
+//       </Wrapper>
+//     );
+//   }
+// }
+
+const mapStateToProps = state => ({
+  token: state.base.token
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(App);
