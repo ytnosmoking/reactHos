@@ -70,7 +70,7 @@ class loginForm extends Component {
               htmlType="submit"
               className="login-form-button"
             >
-              Log in
+              Log in1
             </Button>
           </Form.Item>
         </Form>
