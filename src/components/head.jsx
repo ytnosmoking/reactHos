@@ -7,9 +7,9 @@ import { changeToken } from "../store/actions";
 const { Header } = Layout;
 
 class head extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     const { token, doctorInfo, change } = this.props;
@@ -26,14 +26,14 @@ class head extends Component {
                 src={
                   this.doctorInfo
                     ? this.doctorInfo.avatar
-                    : "./static/img/userIcon.png"
+                    : require("../assets/img/logo.png")
                 }
-                alt="img"
+                alt="avatar"
               />
               &nbsp; {this.doctorInfo ? this.doctorInfo.name : ""}
             </span>
             &nbsp; &nbsp;
-            <span className="headerExit" onClick={() => change(token)}>
+            <span className="headerExit" onClick={() => change(false)}>
               退出系统
             </span>
           </div>

@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Form, Icon, Input, Button, Checkbox, Spin } from "antd";
 
-import Logo from "../assets/img/logo.png";
-import Wrapper from "./signIn.js";
+import Logo from "../../assets/img/logo.png";
+import Wrapper from "./style";
+import { changeToken } from "../../store/actions";
+import { connect } from "react-redux";
 
 const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 class loginForm extends Component {
@@ -12,7 +14,9 @@ class loginForm extends Component {
   }
   handleSubmit = e => {
     e.preventDefault();
+    this.props.change(true);
     this.props.form.validateFields((err, values) => {
+      console.log(values);
       if (!err) {
         console.log("Received values of form: ", values);
       }
@@ -32,44 +36,25 @@ class loginForm extends Component {
           <img src={Logo} alt="logo" />
           <Form.Item>
             {getFieldDecorator("username", {
-              rules: [
-                { required: true, message: "Please input your username!" }
-              ]
-            })(
-              <Input
-                prefix={
-                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
-                }
-                placeholder="Username"
-              />
-            )}
+              initialValue: "hkydc001",
+              rules: [{ required: true, message: "输入用户名字" }]
+            })(<Input placeholder="Username" />)}
           </Form.Item>
           <Form.Item>
             {getFieldDecorator("password", {
               rules: [
                 { required: true, message: "Please input your Password!" }
               ]
-            })(
-              <Input
-                prefix={
-                  <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
-                }
-                type="password"
-                placeholder="Password"
-              />
-            )}
+            })(<Input type="password" placeholder="Password" />)}
           </Form.Item>
-          <Form.Item>
+          <Form.Item style={{ marginBottom: 0 }}>
             {getFieldDecorator("remember", {
               valuePropName: "checked",
               initialValue: true
-            })(<Checkbox>Remember me</Checkbox>)}
-
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="login-form-button"
-            >
+            })(<Checkbox>记住密码</Checkbox>)}
+          </Form.Item>
+          <Form.Item>
+            <Button htmlType="submit" className="login-form-button">
               Log in
             </Button>
           </Form.Item>
@@ -78,5 +63,11 @@ class loginForm extends Component {
     );
   }
 }
+const mapDispatchToProps = dispatch => ({
+  change: token => dispatch(changeToken(token))
+});
 const signIn = Form.create({ name: "normal_login" })(loginForm);
-export default signIn;
+export default connect(
+  null,
+  mapDispatchToProps
+)(signIn);
