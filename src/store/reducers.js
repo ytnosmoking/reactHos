@@ -24,13 +24,13 @@ const baseInfo = {
 
 export const base = (state = baseInfo, action) => {
   switch (action.type) {
-    case 'changeToken':
+    case 'ctrToken':
       return Object.assign({}, state, {
         token: action.value
       });
     case 'loading':
       return Object.assign({}, state, {
-        loading: !state.loading
+        loading: action.status
       })
     default:
       return state

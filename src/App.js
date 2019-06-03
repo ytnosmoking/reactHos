@@ -1,17 +1,20 @@
 import React from "react";
 
+import { connect } from "react-redux";
+import { Layout, Menu, Spin, Icon } from "antd";
+import ReactSVG from "react-svg";
+import { svgSrc } from "./utils/tools";
+
+import { Switch, Route, Redirect, Link, withRouter } from "react-router-dom";
+import { baseRoutes, infoRoutes } from "./routers";
 import Wrapper from "./AppStyle";
 import CommonHead from "./components/head";
-import { connect } from "react-redux";
-import { Layout, Menu, Spin } from "antd";
-
-import { baseRoutes, infoRoutes } from "./routers";
-
-import { Switch, Route, Redirect, Link } from "react-router-dom";
+import Loading from "./components/Loading";
 const { Content, Sider } = Layout;
 
 function App(props) {
-  let { token, loading } = props;
+  let { token, loading, location } = props;
+  const { pathname } = location;
   console.log(props);
   const routes = token ? infoRoutes : baseRoutes;
   const redirect = token ? "/record" : "/login";
@@ -25,11 +28,15 @@ function App(props) {
           }}
         >
           {token ? (
-            <Sider>
-              <Menu mode="inline" theme="dark">
+            <Sider className="sidebar">
+              <Menu mode="inline" defaultSelectedKeys={[pathname]}>
                 {infoRoutes.map(route => (
-                  <Menu.Item key={route.name}>
-                    <Link to={route.to}> {route.meta.title} </Link>
+                  <Menu.Item key={route.to}>
+                    <Link to={route.to}>
+                      <ReactSVG src={svgSrc(route.meta.icon)} />
+                      <br />
+                      {route.meta.title}
+                    </Link>
                   </Menu.Item>
                 ))}
               </Menu>
@@ -43,7 +50,7 @@ function App(props) {
             }}
           >
             {loading ? (
-              <Spin />
+              <Loading />
             ) : (
               <Switch>
                 {routes.map(route => (
@@ -75,4 +82,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   null
-)(App);
+)(withRouter(App));

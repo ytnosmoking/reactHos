@@ -40,6 +40,49 @@ export default styled.div `
       cursor: pointer;
     }
   }
+  .sidebar {
+    flex: none !important;
+    min-width:128px !important;
+    max-width: 128px !important;
+    width: 128px !important;
+    padding: 20px 0 0 14px;
+    background: #fff;
+    li {
+      margin:0;
+      height: 108px;
+      line-height: 1;
+      transition: all .3s ease;
+      &.ant-menu-item-active {
+        a {color: #28b7a3!important;}
+      }
+      a {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items:center;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      &.ant-menu-item-selected {
+        background: #28b7a3;
+        box-shadow: 0px 0px 11px 1px rgba(40, 183, 163, 0.2);
+        border-radius: 12px 0px 0px 12px;
+        &:after {
+          border-right: none ;
+        }
+        a {color: #fff!important;}
+        svg {
+          fill:  #fff;
+        }
+      }
+    }
+    svg {
+      width: 36px;
+      height: 36px;
+      fill: #28b7a3;
+    }
+  }
 }
  
 `

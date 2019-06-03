@@ -1,5 +1,5 @@
 const devUrl = 'http://hkyyd_test.hooook.com/api' // 测试
-// const devUrl = 'http://xyd.hooook.com/api/' // 测试
+// const devUrl = 'http://hkyyd.hooook.com/api/' // 测试
 
 const proUrl = '' // 测试
 
@@ -13,3 +13,6 @@ export const API = {
   shop: '/doctor/pharmacies', // 药店
   medicine: '/doctor/drugs' // 药品
 }
+
+
+export const origin = 'doctor'

@@ -12,20 +12,31 @@ export const baseRoutes = [{
   components: getComponents('Login')
 }]
 
-export const infoRoutes = [{
-  to: '/record',
-  name: 'record',
-  meta: {
-    icon: 'record',
-    title: '记录'
-  },
-  components: getComponents('Record')
-}, {
-  to: '/reciple',
-  name: 'reciple',
-  meta: {
-    icon: 'reciple',
-    title: '处方'
-  },
-  components: getComponents('Reciple')
-}]
+export const infoRoutes = [
+
+  {
+    to: '/record',
+    name: 'record',
+    meta: {
+      icon: 'record',
+      title: '记录'
+    },
+    components: getComponents('Record')
+  }, {
+    to: '/reciple',
+    name: 'reciple',
+    meta: {
+      icon: 'reciple',
+      title: '处方'
+    },
+    components: getComponents('Reciple')
+  }, {
+    to: '/setting',
+    name: 'setting',
+    meta: {
+      icon: 'setting',
+      title: '设置'
+    },
+    components: getComponents('Setting')
+  }
+]

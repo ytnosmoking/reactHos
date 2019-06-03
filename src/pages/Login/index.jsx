@@ -3,8 +3,9 @@ import { Form, Icon, Input, Button, Checkbox, Spin } from "antd";
 
 import Logo from "../../assets/img/logo.png";
 import Wrapper from "./style";
-import { changeToken } from "../../store/actions";
+import { triggerLogin } from "../../store/actions";
 import { connect } from "react-redux";
+import { getItem } from "../../utils";
 
 const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 class loginForm extends Component {
@@ -14,15 +15,18 @@ class loginForm extends Component {
   }
   handleSubmit = e => {
     e.preventDefault();
-    this.props.change(true);
+
     this.props.form.validateFields((err, values) => {
       console.log(values);
+
       if (!err) {
-        console.log("Received values of form: ", values);
+        this.props.login(values);
       }
     });
   };
   render() {
+    let account = getItem("account");
+    account = account ? JSON.parse(account) : "";
     const { getFieldDecorator } = this.props.form;
     return (
       <Wrapper>
@@ -36,21 +40,20 @@ class loginForm extends Component {
           <img src={Logo} alt="logo" />
           <Form.Item>
             {getFieldDecorator("username", {
-              initialValue: "hkydc001",
+              initialValue: account.username || "",
               rules: [{ required: true, message: "输入用户名字" }]
             })(<Input placeholder="Username" />)}
           </Form.Item>
           <Form.Item>
             {getFieldDecorator("password", {
-              rules: [
-                { required: true, message: "Please input your Password!" }
-              ]
+              initialValue: account.password || "",
+              rules: [{ required: true, message: "密码不能为空！" }]
             })(<Input type="password" placeholder="Password" />)}
           </Form.Item>
           <Form.Item style={{ marginBottom: 0 }}>
             {getFieldDecorator("remember", {
               valuePropName: "checked",
-              initialValue: true
+              initialValue: account.remember || false
             })(<Checkbox>记住密码</Checkbox>)}
           </Form.Item>
           <Form.Item>
@@ -64,7 +67,7 @@ class loginForm extends Component {
   }
 }
 const mapDispatchToProps = dispatch => ({
-  change: token => dispatch(changeToken(token))
+  login: value => dispatch(triggerLogin(value))
 });
 const signIn = Form.create({ name: "normal_login" })(loginForm);
 export default connect(

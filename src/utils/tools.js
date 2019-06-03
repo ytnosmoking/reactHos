@@ -1,11 +1,11 @@
-import service from './axios'
-export function getItem (params) {
+import service from '../axios'
+export function getItem(params) {
   return JSON.parse(localStorage.getItem(params))
 }
-export function setItem (key, value) {
+export function setItem(key, value) {
   localStorage.setItem(key, JSON.stringify(value))
 }
-export function removeItem (key) {
+export function removeItem(key) {
   localStorage.removeItem(key)
 }
 
@@ -44,9 +44,9 @@ export const makeStandardTimeFormat = time => {
   const date = new Date(time);
   const Y = date.getFullYear() + '-';
   const M =
-    (date.getMonth() + 1 < 10
-      ? '0' + (date.getMonth() + 1)
-      : date.getMonth() + 1) + '-';
+    (date.getMonth() + 1 < 10 ?
+      '0' + (date.getMonth() + 1) :
+      date.getMonth() + 1) + '-';
   const D = date.getDate();
   const h = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
   const m =
@@ -150,3 +150,5 @@ export const putData = (url, data) => {
     method: 'put'
   })
 }
+
+export const svgSrc = name => require(`../assets/svg/${name}.svg`)

@@ -28,9 +28,12 @@ export default styled.div `
     &>div {
       width:100%;
     }
+    .ant-checkbox-checked .ant-checkbox-inner {
+      background: #28b7a3;
+    }
     .ant-checkbox-inner {
       transform:scale(1.4);
-      background: #28b7a3;
+      
       border-radius: 50%;
       border-color:#28b7a3!important;
     }

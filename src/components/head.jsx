@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Layout } from "antd";
 import { connect } from "react-redux";
 
-import { changeToken } from "../store/actions";
+import { triggerExit } from "../store/actions";
 const { Header } = Layout;
 
 class head extends Component {
@@ -13,9 +13,9 @@ class head extends Component {
 
   render() {
     const { token, doctorInfo, change } = this.props;
-    console.log(token);
+
     console.log(doctorInfo);
-    console.log(changeToken);
+
     return (
       <Header className={token ? "active" : ""}>
         <span onClick={() => change(token)}>好快云药店-问诊医师工作平台</span>
@@ -50,7 +50,7 @@ const mapStateToProps = state => ({
   doctorInfo: state.base.doctorInfo
 });
 const mapDispatchToProps = dispatch => ({
-  change: token => dispatch(changeToken(token))
+  change: token => dispatch(triggerExit(token))
 });
 
 export default connect(
