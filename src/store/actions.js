@@ -28,7 +28,7 @@ export const triggerLogin = (params) => {
     })
     dispatch(loading())
     if (res.code === 200) {
-      setItem('token', res.message)
+      setItem('token', res.data.access_token)
       if (remember) {
         setItem('account', JSON.stringify(params))
       } else {

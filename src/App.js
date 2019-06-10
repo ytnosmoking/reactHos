@@ -15,7 +15,9 @@ const { Content, Sider } = Layout;
 function App(props) {
   let { token, loading, location } = props;
   const { pathname } = location;
-  console.log(props);
+  console.log(location);
+  console.log(pathname);
+  // console.log(props);
   const routes = token ? infoRoutes : baseRoutes;
   const redirect = token ? "/record" : "/login";
   return (
@@ -29,12 +31,17 @@ function App(props) {
         >
           {token ? (
             <Sider className="sidebar">
-              <Menu mode="inline" defaultSelectedKeys={[pathname]}>
+              <Menu
+                mode="inline"
+                // defaultSelectedKeys={[pathname]}
+                selectedKeys={[pathname]}
+              >
                 {infoRoutes.map(route => (
                   <Menu.Item key={route.to}>
                     <Link to={route.to}>
                       <ReactSVG src={svgSrc(route.meta.icon)} />
                       <br />
+                      {route.to}
                       {route.meta.title}
                     </Link>
                   </Menu.Item>

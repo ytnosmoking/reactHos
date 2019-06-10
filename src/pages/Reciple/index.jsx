@@ -6,7 +6,16 @@ class index extends Component {
     this.state = {};
   }
   render() {
-    return <div>this is Reciple</div>;
+    const arr = new Array(20);
+    return (
+      <div>
+        <ul>
+          {arr.map((item, index) => (
+            <li key={index}>{index}</li>
+          ))}
+        </ul>
+      </div>
+    );
   }
 }
 
